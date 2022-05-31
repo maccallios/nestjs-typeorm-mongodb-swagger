@@ -62,18 +62,23 @@ p jest
 
 ![app overview](docs/images/tests-services.png)
 
-runs all the tests defined in
+runs all the Jest tests defined in
 
-* [app.controller.spec.ts](src/app.controller.ts)
+* [app.controller.spec.ts](src/app.controller.spec.ts)
+* [books/books.module.spec.ts](src/books/books.module.spec.ts)
 * [books/books.controller.spec.ts](src/books/books.controller.spec.ts)
 * [books/books.service.spec.ts](src/books/books.service.spec.ts)
 
 
-it is possible to run the test by partial name match,
+*It is possible to run the test by partial name match,
 for example "p jest -t 'AppController'"
-will run all the tests in app.controller.spec.ts
+will run all the tests in [app.controller.spec.ts](src/app.controller.spec.ts).
 
-since we use a single mongo instance jest test must in sequential (default is paralell), by adding --runInBand argument.
+`Since we use a single mongo instance jest test must be performad in sequential (default is paralell), by adding --runInBand argument.`
+
+### Jest TypeORM repository mocking
+[books/books.module.spec.ts](src/books/books.module.spec.ts)
+shows Jest mocking the original typeORM repository(which is injecteds by NextJS into BookService instance), so BookService uses the mocked repository for every ORM operation. It is possible to test the BookService all way to the ORM level, including the method arguments, etc.
 
 
 ## End to end tests
