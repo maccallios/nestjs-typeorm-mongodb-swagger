@@ -74,7 +74,7 @@ runs all the Jest tests defined in
 for example "p jest -t 'AppController'"
 will run all the tests in [app.controller.spec.ts](src/app.controller.spec.ts).
 
-`Since we use a single mongo instance jest test must be performad in sequential (default is paralell), by adding --runInBand argument.`
+Since we use a single mongo instance jest test must be performad in sequential (default is paralell), by adding --runInBand argument.
 
 ### Jest TypeORM repository mocking
 [books/books.module.spec.ts](src/books/books.module.spec.ts)
