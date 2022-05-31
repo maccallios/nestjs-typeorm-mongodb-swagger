@@ -114,6 +114,9 @@ export class CreateBookDto {
 
 We create BooksValidationPipe which implements [PipeTransform](https://docs.nestjs.com/pipes) NextJS interface.
 
+If there is an error we throw HttpException which will be sent in Response,
+otherwise just return the original value.
+
 ```typescript
 @Injectable()
 export class BooksValidationPipe implements PipeTransform<any> {
@@ -135,8 +138,7 @@ export class BooksValidationPipe implements PipeTransform<any> {
 }
 ```
 
-If there is an error we throw HttpException which will be sent in Response,
-otherwise just return the original value.
+We inject our BooksValidationPipe(it is annotated with @Injectable() class decorator) into BooksController create method.
 
 
 ```typescript
