@@ -64,9 +64,9 @@ p jest
 
 runs all the tests defined in
 
-* [app.controller.spec.ts](app.controller.ts)
-* [books.controller.spec.ts](books.controller.spec.ts)
-* [books.service.spec.ts](books.service.spec.ts)
+* [app.controller.spec.ts](src/app.controller.ts)
+* [books.controller.spec.ts](src/books/books.controller.spec.ts)
+* [books.service.spec.ts](src/books/books.service.spec.ts)
 
 
 it is possible to run the test by partial name match,
