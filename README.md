@@ -64,7 +64,7 @@ p jest
 
 runs all the tests defined in
 
-* [app.controller.spec.ts](src/app.controller.ts)
+* [app.controller.spec.ts](app.controller.ts)
 * [books.controller.spec.ts](src/books.controller.spec.ts)
 * [books.service.spec.ts](src/books.service.spec.ts)
 
