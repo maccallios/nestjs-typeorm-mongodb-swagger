@@ -71,7 +71,7 @@ runs all the Jest tests defined in
 
 
 *It is possible to run the test by partial name match,
-for example "p jest -t 'AppController'"
+for example "p jest --runInBand -t 'AppController'"
 will run all the tests in [app.controller.spec.ts](src/app.controller.spec.ts).
 
 Since we use a single mongo instance jest test must be performad in sequential (default is paralell), by adding --runInBand argument.
