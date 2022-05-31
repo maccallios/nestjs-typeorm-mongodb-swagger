@@ -82,7 +82,7 @@ since we use a single mongo instance jest test must in sequential (default is pa
 pnpm run test:e2e
 ```
 
-![app overview](docs/images/test-e2e.png)
+![app end-to-end tests](docs/images/test-e2e.png)
 
 while the controller and services tests usingg shortcomings,
 this is end-to-end test.
@@ -91,6 +91,69 @@ This tests the CRUD and search functionality.
 see [test/app.e2e-spec.ts](test/app.e2e-spec.ts) file.
 
 the tests can be run by pattern with -t switch
+
+### Validation with [class-validator](https://github.com/typestack/class-validator) package
+
+class-validator package provides nice and programmer-friendly API
+for decorator and non-decorator based validation. Internally uses [validator.js](https://github.com/validatorjs/validator.js) to perform validation.
+
+```typescript
+export class CreateBookDto {
+  @IsString()
+  title: string;
+  
+  ...
+  ...
+}
+```
+
+We create BooksValidationPipe which implements [PipeTransform](https://docs.nestjs.com/pipes) NextJS interface.
+
+```typescript
+@Injectable()
+export class BooksValidationPipe implements PipeTransform<any> {
+  async transform(value: any, { metatype }: ArgumentMetadata) {
+
+    const obj = plainToClass(metatype, value)
+    const errors = await validate(obj)
+
+    if (errors.length > 0) {
+      throw new HttpException({
+        status: HttpStatus.FORBIDDEN,
+        error: 'validation failed',FORBIDDEN
+        errors: JSON.stringify(errors),
+      }, HttpStatus.FORBIDDEN)
+    }
+
+    return value
+  }
+}
+```
+
+If there is an error we throw HttpException which will be sent in Response,
+otherwise just return the original value.
+
+
+```typescript
+@Controller('books')
+export class BooksController {
+  ...
+  create(@Body(BooksValidationPipe) createBookDto: CreateBookDto) {
+    return this.booksService.create(createBookDto);
+  }
+```
+
+This is included in end-to-end test [app.e2e-spec.ts](app.e2e-spec.ts) file:
+
+```typescript
+await request(app.getHttpServer())
+  .post(`/books`)
+  .send({ ...book, author: 100 })
+  .expect(HttpStatus.FORBIDDEN)
+  .expect('Content-Type', /json/)
+```
+
+
 
 ### Text Search
 
