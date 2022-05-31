@@ -143,7 +143,7 @@ export class BooksController {
   }
 ```
 
-This is included in end-to-end test [app.e2e-spec.ts](app.e2e-spec.ts) file:
+This is included in end-to-end test [test/app.e2e-spec.ts](test/app.e2e-spec.ts) file:
 
 ```typescript
 await request(app.getHttpServer())
