@@ -1,0 +1,28 @@
+[
+  {
+    "name": "default",
+    "skip": false,
+    "type": "mongodb",
+    "host": "localhost",
+    "port": "27017",
+    "database": "test",
+    "useUnifiedTopology": true,
+    "autoLoadEntities": true,
+    "synchronize": true,
+    "logging": true,
+    "entities": [
+      "dist/**/entities/*.entity.js"
+    ],
+    "subscribers": [
+      "src/subscriber/*.ts"
+    ],
+    "migrations": [
+      "src/migration/*.ts"
+    ],
+    "cli": {
+      "entitiesDir": "src/entity",
+      "migrationsDir": "src/migration",
+      "subscribersDir": "src/subscriber"
+    }
+  }
+]
